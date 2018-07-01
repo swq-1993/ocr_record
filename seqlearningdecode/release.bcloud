@@ -1,0 +1,6 @@
+mkdir -p sub/lib 
+mkdir -p sub/include 
+cp include/* sub/include/
+cp lib/* sub/lib/
+cp subbcloud sub/BCLOUD
+mv subbcloud BCLOUD

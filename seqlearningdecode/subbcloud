@@ -1,0 +1,10 @@
+#edit-mode: -*- python -*-
+#coding:gbk
+
+#????·??.
+WORKROOT('../../../')
+PLATFORM('v2')
+COMPILER('gcc482')
+
+HEADERS('include/*', '$INC')
+StaticLibrary('SeqLDecoder', PreBuilt(True))

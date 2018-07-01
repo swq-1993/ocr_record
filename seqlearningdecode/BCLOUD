@@ -1,0 +1,202 @@
+#edit-mode: -*- python -*-
+#coding:gbk
+
+WORKROOT('../../../')
+
+CopyUsingHardLink(True)
+PLATFORM('v2')
+COMPILER('gcc482')
+
+#ENABLE_MULTI_LIBS(True)
+
+CPPFLAGS('-DNDEBUG -D_GNU_SOURCE -D__STDC_LIMIT_MACROS -DVERSION=\\\"1.9.8.7\\\"')
+
+CFLAGS('-O3 -g -pipe -W -Wall -fPIC -msse2 -mfpmath=sse -ffast-math -Wreorder',
+       '-Wwrite-strings -Wswitch -Wpointer-arith -W -Wconversion -Wsign-promo',
+       '-Wredundant-decls -Wformat')
+
+CXXFLAGS('-O3 -g --std=c++11 -pipe -fPIC -msse2 -mfpmath=sse -ffast-math',
+         '-W -Wall -Wreorder -Wwrite-strings -Wswitch -Wpointer-arith',
+         '-W -Wconversion -Wsign-promo -Wredundant-decls -Wformat')
+
+IDLFLAGS('--compack')
+UBRPCFLAGS('--compack')
+
+INCPATHS('./ ./waimai_ocr ./service ./seq_recognition')
+INCPATHS('../../../thirdsrc/ocr-dep-gcc482/include/caffe_dep/')
+LDFLAGS('-ldl -lpthread -lm -lcrypto -lrt -lbz2 -lssl')
+
+# opencv-gcc 4.8.2
+INCPATHS('$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/include/opencv',
+         '$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/include/opencv/opencv')
+LIBS('$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/lib/opencv/libopencv_calib3d.a',
+     '$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/lib/opencv/libopencv_contrib.a',
+     '$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/lib/opencv/libopencv_core.a',
+     '$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/lib/opencv/libopencv_features2d.a',
+     '$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/lib/opencv/libopencv_flann.a',
+     '$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/lib/opencv/libopencv_gpu.a',
+     '$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/lib/opencv/libopencv_highgui.a',
+     '$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/lib/opencv/libopencv_imgproc.a',
+     '$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/lib/opencv/libopencv_legacy.a',
+     '$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/lib/opencv/libopencv_ml.a',
+     '$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/lib/opencv/libopencv_nonfree.a',
+     '$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/lib/opencv/libzlib.a',
+     '$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/lib/opencv/libIlmImf.a',
+     '$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/lib/opencv/liblibjasper.a',
+     '$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/lib/opencv/liblibtiff.a',
+     '$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/lib/opencv/liblibpng.a',
+     '$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/lib/opencv/liblibjpeg.a')
+
+#caffe.so for dect-v3
+LIBS('$OUT_ROOT/thirdsrc/ocr-dep-gcc482/output/so/caffe_dep/libcaffewrapper.so')
+# paddle_predictor
+INCPATHS('$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/include/paddle_predictor')
+LIBS('$OUT_ROOT/baidu/third-party/ocr-dep-gcc482/output/lib/paddle_predictor/libpaddle_predictor_cuda80_cudnn5.a')
+CONFIGS('baidu/third-party/ocr-dep-gcc482@resnet-cuda80-cudnn5-predict@git_branch', Libraries(''))
+CONFIGS('thirdsrc/boost@boost_1-56-0-100_PD_BL', DisBuild())
+
+# Config
+CONFIGS('lib2-64/nlp/eng-spell-check@eng-spell-check_1-0-7-0_PD_BL')
+CONFIGS('lib2-64/ullib@ullib_3-1-126-0_PD_BL')
+
+# newly added for the 3 libs from nlp
+CONFIGS('lib2-64/bsl@bsl_1-1-33-0_PD_BL')
+CONFIGS('lib2-64/ccode@ccode_3-1-12-1_PD_BL')
+CONFIGS('lib2-64/dict@dict_3-1-15-0_PD_BL')
+CONFIGS('lib2-64/others-ex@others-ex_3-1-7-0_PD_BL')
+CONFIGS('public/odict@odict_1-1-4-2_PD_BL')
+CONFIGS('ps/se/include@include_1-3-0-0_PD_BL')
+CONFIGS('public/urlparser@urlparser_1-2-2-1_PD_BL')
+CONFIGS('ps/se/dict-set@dict-set_1-1-20-0_PD_BL')
+CONFIGS('lib2-64/nlp/lm-score@lm-score_1-0-10-126669_PD_BL', DisBuild())
+CONFIGS('lib2-64/nlp/compact-trie@compact-trie_1-0-9-126671_PD_BL', DisBuild())
+CONFIGS('lib2-64/text-util@text-util_1-0-7-126672_PD_BL', DisBuild())
+#############
+
+CONFIGS('thirdsrc/gpc@gpc_1-0-0-4643_PD_BL')
+CONFIGS('third-64/glog@glog_0-3-3-100_PD_BL')
+CONFIGS('third-64/gflags@gflags_2-0-0-100_PD_BL')
+CONFIGS('thirdsrc/protobuf@protobuf_2-4-1-300_PD_BL')
+CONFIGS('baidu/idl-ocr-alg/ocrattr@ocrattr_1-0-12-1_PD_BL@git_tag')
+CONFIGS('baidu/idl-ocr-alg/rcnnchar@rcnnchar_1-0-40-1_PD_BL@git_tag')
+#CONFIGS('baidu/idl-ocr-alg/rcnnchar@20170926_multi_model@git_branch')
+#CONFIGS('baidu/idl-ocr-alg/linegenerator@reserve_small_line@git_branch')
+CONFIGS('baidu/idl-ocr-alg/linegenerator@linegenerator_1-0-37-1_PD_BL@git_tag')
+
+# deep-cnn
+CONFIGS('app/search/vis/vis-lib/deep-cnn@deep-cnn_1-0-32-32932_PD_BL', DisBuild())
+CONFIGS('thirdsrc/libmkl-gcc345@libmkl-gcc345_1-1-0-6150_PD_BL',
+        Libraries('libmkl_core.a',
+                  'libmkl_intel_lp64.a',
+                  'libmkl_sequential.a'),
+        DisBuild())
+
+predictor_headers = GLOB('predictor/seql_predictor.h',
+                         'predictor/seql_paddle_predictor.h',
+                         'predictor/seql_deepcnn_predictor.h')
+predictor_sources = GLOB('predictor/seql_predictor.cpp',
+                         'predictor/seql_paddle_predictor.cpp',
+                         'predictor/seql_deepcnn_predictor.cpp')
+seq_model_headers = GLOB('seq_recognition/seq_recg_model.h')
+seq_model_sources = GLOB('seq_recognition/seq_recg_model.cpp')
+
+waimai_sources = GLOB('waimai_ocr/fit_line.cpp',
+                      'waimai_ocr/seql_asia_line_bmss_word_decoder_wm.cpp',
+                      'waimai_ocr/seql_eng_segment_fun_wm.cpp',
+                      'waimai_ocr/seq_ocr_chn_wm.cpp',
+                      'waimai_ocr/mul_row_segment_wm.cpp',
+                      'waimai_ocr/seql_asia_word_recog_wm.cpp',
+                      'waimai_ocr/seql_eng_word_seg_processor_wm.cpp')
+waimai_headers = GLOB('waimai_ocr/fit_line.h',
+                      'waimai_ocr/seql_asia_word_recog_wm.h',
+                      'waimai_ocr/seql_eng_segment_fun_wm.h',
+                      'waimai_ocr/seq_ocr_chn_wm.h')
+service_sources = GLOB('service/rcnn_loc.cpp')
+
+user_sources = GLOB('common_func.cpp',
+                    'dll_main.cpp',
+                    'ini_file.cpp',
+                    'mul_row_segment.cpp',
+                    'reform_en_rst.cpp',
+                    'seql_asia_line_bmss_word_decoder.cpp',
+                    'seql_asia_word_recog.cpp',
+                    'SeqLEngLineBMSSWordDecoder.cpp',
+                    'SeqLEngPrefixSearch.cpp',
+                    'SeqLEngSegmentFun.cpp',
+                    'SeqLEngWordRecog.cpp',
+                    'SeqLEngWordSegProcessor.cpp',
+                    'SeqLEuroLineBMSSWordDecoder.cpp',
+                    'SeqLEuroWordRecog.cpp',
+                    'seq_ocr_chn.cpp',
+                    'seq_ocr_model.cpp',
+                    'seq_ocr_eng.cpp',
+                    'seq_ocr_model_eng.cpp',
+                    'seql_asia_word_seg_processor.cpp',
+                    'char_recg.cpp',
+                    'seq_ocr_chn_batch.cpp',
+		            'seql_asia_att_recog.cpp',
+		            'seq_ocr_spatial_att.cpp',
+		            'proc_func.cpp',
+                    predictor_sources,
+                    waimai_sources,
+                    seq_model_sources,
+		            service_sources)
+
+user_headers = GLOB('SeqLDecodeDef.h',
+                    'SeqLEngWordRecog.h',
+                    'SeqLEuroWordRecog.h',
+                    'SeqLEngLineBMSSWordDecoder.h',
+                    'SeqLEngPrefixSearch.h',
+                    'SeqLEngWordSegProcessor.h',
+                    'SeqLLoadRegInfor.h',
+                    'SeqLEngLineDecodeHead.h',
+                    'SeqLEngSegmentFun.h',
+                    'SeqLEuroLineBMSSWordDecoder.h',
+                    'SeqLSaveRegInfor.h',
+                    'dll_main.h',
+                    'ini_file.h',
+                    'seql_asia_word_recog.h',
+                    'seq_ocr_chn.h',
+                    'seq_ocr_eng.h',
+                    'seq_ocr_model_eng.h',
+                    'seq_ocr_model.h',
+                    'seq_ocr_chn_batch.h',
+		            'seql_asia_att_recog.h',
+                    'seq_ocr_spatial_att.h',
+		            predictor_headers,
+                    waimai_headers,
+                    seq_model_headers)
+
+StaticLibrary('SeqLDecoder',
+              Sources(user_sources),
+              HeaderFiles(user_headers))
+
+LIBS('$OUT/lib/libSeqLDecoder.a')
+
+#Application('test-main-mul-thread', Sources("test-main-mul-thread.cpp"))
+#Application('test-main-mul-thread-chn', Sources("test-main-mul-thread-chn.cpp"))
+#Application('test-single-char', Sources("test-single-char.cpp"))
+#Application('test-main-new-eng', Sources("test-main-new-eng.cpp"))
+#Application('row-seq-batch', Sources("test-row-batch.cpp"))
+#Application('row-paddle-batch', Sources("test-paddle-batch.cpp"))
+#Application('test-main-predict',Sources("./test-main-predict.cpp"))
+#Application('test-main-word-seg',Sources("./test-main-word-seg.cpp"))
+#Application('test-main-waimai',Sources("./test-main-waimai.cpp"))
+#Application('rcnn-seq-chn',Sources("./test-rcnn-seq.cpp"))
+#Application('rcnn-seq-jap-kor',Sources("./test-rcnn-seq-jap-kor.cpp"))
+#Application('test-recg', Sources("test-recg.cpp"))
+########sunwanqi noted 1.test-ve-recg-orient 2.test-v3-recg-orient-para 3.test-v3-recg-orient-eng-gpu
+#Application('test-v2-recg-orient',Sources("./test-v2-recg-orient.cpp"))
+Application('test-v3-recg-orient',Sources("./test-v3-recg-orient.cpp"))
+Application('test-v3-recg-orient-eng',Sources("./test-v3-recg-orient-eng.cpp"))
+#Application('test-v3-recg-orient-para',Sources("./test-v3-recg-orient-para.cpp"))
+Application('test-v3-recg-orient-eng-gpu',Sources("./test-v3-recg-orient-eng-gpu.cpp"))
+Application('rcnn-seq-eng',Sources("./test-rcnn-seq-eng.cpp"))
+#Application('rcnn-seq-eng-menu',Sources("./test-rcnn-seq-menu.cpp"))
+Application('rcnn-seq-eng-att',Sources("./test-rcnn-eng-att.cpp"))
+Application('test-spatial-att',Sources("./test-spatial-att.cpp"))
+##Application('rcnn-seq-jap-kor',Sources("./test-rcnn-seq-jap-kor.cpp"))
+#Application('rcnn-seq-handwrite-number',Sources("./test-main-handwrite-number.cpp"))
+#Application('rcnn-seq-handwrite',Sources("./test-main-handwrite.cpp"))
+
+OUTPUT('subbcloud', '$OUT')
