@@ -1,0 +1,22 @@
+{
+  "backgrand": { 
+   "no_backgrand":{"probility":0}, 
+   "foreground_background":{"probility":1,"list":"./gray_back.list"},
+   "fusion":{
+   	"probility":0,
+   	"list":"./gray_back.list",
+   	"a":0.5,
+   	"b":0.5,
+   	"c":0
+   }
+  },
+  "rotation" : 2.0,
+  "Gaussian_blur_kernal_size" : 7,
+  "resize_rate":0.2,
+  "pepper_noise":0.05,
+  "shift":8,
+  "persp_x":0,
+  "persp_y":0,
+  "persp_z":0,
+  "addline_problity":0.025
+}
